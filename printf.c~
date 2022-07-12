@@ -1,0 +1,6 @@
+#include <unistd.h>
+#include "main.h"
+#include <stdio.h>
+/**
+ * buffer_print - print given buffer to stdout
+ * @buffer: buffer to print
