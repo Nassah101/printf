@@ -1,64 +1,41 @@
-#ifndef _FUNCTION_PRINTF_H_
-#define _FUNCTION_PRINT_H_
+#ifndef MAIN_H
+#define MAIN_H
 #include <stdarg.h>
 #include <stdlib.h>
-#include <stddef.h>
-#define BUFFR_SIZE 1024
+#include <stdio.h>
+#include <limits.h>
+#include <unistd.h>
 /**
-* struct modifier - modifier fields collection
-* @flags: flags field composed of ['0', ' ', '#', '+', '-']
-* @width: width field, positive number
-* @precision: precision field positive number not including '.'
-* or -1 '*'
-* @lenght: lenght field string composed of ['h', 'l']
-* @specifier: specifier character can of
-* ['c', 's', '%', 'd', 'i', 'b', 'u', 'o', 'x', 'X', 'S', 'p', 'r', 'R']
+* struct format - match the conversion specifiers for printf
+* @id: type char pointer of the specifier
+* @f: type pointer to function for the conversion specifier
 */
-typedef struct modifier
+typedef struct format
 {
-char *flags;
-int width;
-int precision;
-char *lenght;
-char specifier;
-} modifier_t;
-void *_realloc(void *ptr, unsigned int, unsigned int);
-int _putchar(char c);
-char *print_binary(modifier_t *, va_list);
-char *print_unsigned_int(modifier_t *, va_list);
-char *print_octal(modifier_t *, va_list);
-char *print_hex(modifier_t *, va_list);
-char *print_char(modifier_t *, va_list ap);
-char *print_int(modifier_t *, va_list ap);
-char *print_string(modifier_t *modif, va_list ap);
-char *print_rev(modifier_t *, va_list ap);
-char *print_big_s(modifier_t *, va_list);
-char *print_pointer(modifier_t *, va_list);
-char *rot13(char *s);
+char *id;
+int (*f)();
+} conver_match;
+int printf_pointer(va_list val);
+int printf_hex_aux(unsigned long int num);
+int printf_HEX_aux(unsigned int num);
+int printf_exclusive_string(va_list val);
+int printf_HEX(va_list val);
+int printf_hex(va_list val);
+int printf_oct(va_list val);
+int printf_unsigned(va_list args);
+int printf_bin(va_list val);
+int printf_srev(va_list args);
+int printf_rot13(va_list args);
+int printf_int(va_list args);
+int printf_dec(va_list args);
 int _strlen(char *s);
-char *print_rot(modifier_t *, va_list ap);
-void free_modifier(modifier_t *);
-char *get_flags(const char *, unsigned int *);
-int get_width(const char *, unsigned int *);
-int get_precision(const char *, unsigned int *);
-char *get_lenght(const char *, unsigned int *);
-char get_specifier(const char *, unsigned int *);
-modifier_t *get_modifier(const char *,  unsigned int *);
-char *treat_format(const char *, unsigned int *, va_list);
+int *_strcpy(char *dest, char *src);
+int _strlenc(const char *s);
+int rev_string(char *s);
+int _strlenc(const char *s);
+int printf_37(void);
+int printf_char(va_list val);
+int printf_string(va_list val);
+int _putchar(char c);
 int _printf(const char *format, ...);
-char *_strcpy(char *dest, char *src);
-void array_rev(char *arr, int len);
-int int_len(int num);
-char *ito(int n);
-char *reverse(char *s);
-/**
-* struct print - multiple choice print
-* @f: char type of print
-* @func: funct
-*/
-typedef struct print
-{
-char f;
-char *(*func)(modifier_t *, va_list);
-} t_print;
 #endif
